@@ -8,10 +8,10 @@
     tools:context="com.example.x3727349s.visorcartasmagic.MainActivityFragment"
     tools:showIn="@layout/activity_main">
 
-    <TextView
+    <ListView
         android:layout_width="384dp"
         android:layout_height="455dp"
-        android:id="@+id/lvPelis"
+        android:id="@+id/lvCartas"
         android:layout_marginStart="16dp"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginLeft="16dp"

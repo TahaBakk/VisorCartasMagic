@@ -20,7 +20,7 @@ public class MainActivityFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_main, container, false);
 
-        ListView lvPelis = (ListView) view.findViewById(R.id.lvPelis);
+        ListView lvCartas = (ListView) view.findViewById(R.id.lvCartas);
 
         return view;
     }
