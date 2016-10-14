@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -29,7 +30,17 @@ public class MainActivityFragment extends Fragment {
 
         ListView lvCartas = (ListView) view.findViewById(R.id.lvCartas);
 
-        items = new ArrayList<>();
+        String[] data = {
+            "Black Lotus",
+            "Time Walk",
+            "Ancestral Recall",
+            "Lightning Bolt",
+            "Demonic Tutor",
+            "Birds of Paradise"
+        };
+
+
+        items = new ArrayList<>(Arrays.asList(data));
         adapter = new ArrayAdapter<>(
                 getContext(),
                 R.layout.titol_cartes,
