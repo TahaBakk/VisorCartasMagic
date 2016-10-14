@@ -1,5 +1,6 @@
 package com.example.x3727349s.visorcartasmagic;
 
+import android.support.annotation.Nullable;
 import android.support.constraint.solver.ArrayLinkedVariables;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -21,6 +22,13 @@ public class MainActivityFragment extends Fragment {
     private ArrayAdapter<String> adapter;
 
     public MainActivityFragment() {
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        setHasOptionsMenu(true);
     }
 
     @Override
