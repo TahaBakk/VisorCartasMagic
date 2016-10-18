@@ -16,6 +16,17 @@ public class Cartas {
     private int toughness;
     private int power;
     private int manaCost;
+    private String  imageUrl;
+    private String text;
+
+
+    public void setText(String text) {this.text = text;}
+
+    public void setImageUrl(String imageUrl) {this.imageUrl = imageUrl;}
+
+    public String getImageUrl() {return imageUrl;}
+
+    public String getText() {return text;}
 
     public String getName() {
         return name;
@@ -59,12 +70,14 @@ public class Cartas {
 
     public String toString() {
         return "Carta{" +
-                "Name='" + name + '\'' +
-                ", rarity=" + rarity +
-                ", toughness='" + toughness + '\'' +
-                ", power='" + power + '\'' +
-                ", manaCost=" + manaCost +
-                '}';
+               "Name='" + name + '\'' +
+               "Text='" + text + '\'' +
+               ", rarity=" + rarity +
+               ", toughness='" + toughness + '\'' +
+               ", power='" + power + '\'' +
+               ", manaCost=" + manaCost +
+               ", imageUrl=" + imageUrl +
+               '}';
     }
 
 
