@@ -33,6 +33,18 @@ public class HttpUtils {
         return response;
     }
 
+       private static String readStream(InputStream in) throws IOException {
+              InputStreamReader is = new InputStreamReader(in);
+              BufferedReader rd = new BufferedReader(is);
+              String line;
+              StringBuilder response = new StringBuilder();
+              while ((line = rd.readLine()) != null) {
+                     response.append(line);
+                     response.append('\r');
+                 }
+              rd.close();
+              return response.toString();
+          }
+   }
 
 
-}
