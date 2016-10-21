@@ -10,7 +10,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.os.AsyncTask;
@@ -31,36 +30,7 @@ public class MainActivityFragment extends Fragment {
     public MainActivityFragment() {
     }
 
-    private class RefreshDataTask extends AsyncTask<Void, Void, ArrayList<Cartas>> {
 
-
-        @Override
-            protected ArrayList<Cartas> doInBackground(Void... voids) {
-                CartasApi api = new CartasApi();
-
-            ArrayList<Cartas> result = null;
-            try {
-                result = api.getCartes();
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-            Log.d("DEBUG", result.toString());
-
-            return result;
-            }
-
-
-        @Override
-        protected void onPostExecute(ArrayList<Cartas> cartas) {
-            super.onPostExecute(cartas);
-            adapter.clear();
-            for (Cartas carta : cartas){
-                adapter.add(carta.getName());
-            }
-
-        }
-    }
 
 
     @Override
@@ -92,9 +62,40 @@ public class MainActivityFragment extends Fragment {
 
     private void refresh() {
 
-       RefreshDataTask task = new RefreshDataTask();
+        RefreshDataTask task = new RefreshDataTask();
         task.execute();
 
+    }
+
+    private class RefreshDataTask extends AsyncTask<Void, Void, ArrayList<Cartas>> {
+
+
+        @Override
+        protected ArrayList<Cartas> doInBackground(Void... voids) {
+
+            CartasApi api = new CartasApi();
+            ArrayList<Cartas> result = null;
+            try {
+                result = api.getCartes();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+
+            Log.d("DEBUG", result.toString());
+
+            return result;
+        }
+
+
+        @Override
+        protected void onPostExecute(ArrayList<Cartas> cartap) {
+            adapter.clear();
+            for (Cartas carta : cartap){
+                adapter.add(carta.getName());
+            }
+
+        }
     }
 
 

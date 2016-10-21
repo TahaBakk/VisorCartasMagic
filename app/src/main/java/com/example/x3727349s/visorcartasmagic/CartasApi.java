@@ -20,9 +20,9 @@ class CartasApi {
         private final String BASE_URL = "https://api.magicthegathering.io/v1/cards";
 
         ArrayList<Cartas> getCartes() throws JSONException {
-                        Uri builtUri = Uri.parse(BASE_URL)
-                    .buildUpon()
-                    .build();
+            Uri builtUri = Uri.parse(BASE_URL)
+                .buildUpon()
+                .build();
             String url = builtUri.toString();
             return doCall(url);
 
