@@ -31,9 +31,11 @@ public class MainActivityFragment extends Fragment {
             @Override
             protected Void doInBackground(Void... voids) {
                 CartasApi api = new CartasApi();
-                String result = api.getCartes();
+                //String result = api.getCartes();
 
-            Log.d("DEBUG", result);
+                ArrayList<Cartas> result = api.getCartes();
+
+            Log.d("DEBUG", result.toString());
 
             return null;
             }

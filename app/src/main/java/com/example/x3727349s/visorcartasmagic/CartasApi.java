@@ -2,64 +2,72 @@ package com.example.x3727349s.visorcartasmagic;
 
 import android.net.Uri;
 import java.io.IOException;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
+import android.support.annotation.Nullable;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  * Created by x3727349s on 18/10/16.
  */
 
-public class CartasApi {
+class CartasApi {
 
         private final String BASE_URL = "https://api.magicthegathering.io/v1/cards";
 
-        /*String getCartes(String cards) {
-            Uri builtUri = Uri.parse(BASE_URL)
-                    .buildUpon()
-                    //.appendPath("lists")
-                    //.appendPath("movies")
-                    //.appendPath("box_office.json")
-                   // .appendQueryParameter("country", pais)
-                    .build();
-            String url = builtUri.toString();*/
-
-        String getCartes() {
-            Uri builtUri = Uri.parse(BASE_URL)
+        ArrayList<Cartas> getCartes() {
+                        Uri builtUri = Uri.parse(BASE_URL)
                     .buildUpon()
                     .build();
             String url = builtUri.toString();
+            return doCall(url);
 
-            try {
-                String JsonResponse = HttpUtils.get(url);
-                return JsonResponse;
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            return null;
         }
 
+    @Nullable
+    private ArrayList<Cartas> doCall(String url)  {
 
+        try {
+            String JsonResponse = null;
+            JsonResponse = HttpUtils.get(url);
+            return processJson(JsonResponse);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
-   /* String getProximesCartes(String pais) {
-            Uri builtUri = Uri.parse(BASE_URL)
-                          .buildUpon()
-                          .appendPath("lists")
-                          .appendPath("movies")
-                          .appendPath("upcoming.json")
-                          .appendQueryParameter("country", pais)
-                          .appendQueryParameter("apikey", API_KEY)
-                          .build();
-            String url = builtUri.toString();
+        return null;
 
-                   try {
-                  String JsonResponse = HttpUtils.get(url);
-                  return JsonResponse;
-              } catch (IOException e) {
-                  e.printStackTrace();
-              }
-            return null;
-        }*/
+    }
 
+    private ArrayList<Cartas> processJson(String jsonResponse) throws JSONException {
 
+        ArrayList<Cartas> cartas = new ArrayList<>();
 
+        JSONObject data = new JSONObject(jsonResponse);
+        JSONArray jsonCartas = data.getJSONArray("Cards");
+            for (int i = 0; i < jsonCartas.length(); i++) {
+                JSONObject jsonCarta = jsonCartas.getJSONObject(i);
+
+                Cartas carta = new Cartas();
+                carta.setName(jsonCarta.getString("name"));
+                carta.setName(jsonCarta.getString("rarity"));
+                carta.setName(jsonCarta.getString("toughness"));
+                carta.setName(jsonCarta.getString("power"));
+                carta.setName(jsonCarta.getString("manaCost"));
+                carta.setName(jsonCarta.getString("imageUrl"));
+                carta.setName(jsonCarta.getString("text"));
+
+                cartas.add(carta);
+            }
+        return cartas;
+
+    }
 
 
 }
