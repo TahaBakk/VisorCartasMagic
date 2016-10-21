@@ -13,7 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-
+import android.os.AsyncTask;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -27,6 +27,19 @@ public class MainActivityFragment extends Fragment {
 
     public MainActivityFragment() {
     }
+
+    private class RefreshDataTask extends AsyncTask<Void, Void, Void> {
+            @Override
+            protected Void doInBackground(Void... voids) {
+                CartasApi api = new CartasApi();
+                String result = api.getCartes();
+
+            Log.d("DEBUG", result);
+
+            return null;
+            }
+    }
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -57,10 +70,10 @@ public class MainActivityFragment extends Fragment {
 
     private void refresh() {
 
-        CartasApi api = new CartasApi();
+       /* CartasApi api = new CartasApi();
         String result = api.getCartes() ;
 
-        Log.d("DEBUG", result);
+        Log.d("DEBUG", result);*/
 
     }
 
@@ -90,6 +103,9 @@ public class MainActivityFragment extends Fragment {
                 items
         );
         lvCartas.setAdapter(adapter);
+
+
+
 
 
         return view;
