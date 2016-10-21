@@ -19,7 +19,7 @@ class CartasApi {
 
         private final String BASE_URL = "https://api.magicthegathering.io/v1/cards";
 
-        ArrayList<Cartas> getCartes() {
+        ArrayList<Cartas> getCartes() throws JSONException {
                         Uri builtUri = Uri.parse(BASE_URL)
                     .buildUpon()
                     .build();
@@ -29,19 +29,14 @@ class CartasApi {
         }
 
     @Nullable
-    private ArrayList<Cartas> doCall(String url)  {
-
+    private ArrayList<Cartas> doCall(String url) throws JSONException {
+        String JsonRespon=null;
         try {
-            String JsonResponse = null;
-            JsonResponse = HttpUtils.get(url);
-            return processJson(JsonResponse);
+            JsonRespon = HttpUtils.get(url);
         } catch (IOException e) {
             e.printStackTrace();
-        } catch (JSONException e) {
-            e.printStackTrace();
         }
-
-        return null;
+        return processJson(JsonRespon);
 
     }
 
@@ -56,12 +51,12 @@ class CartasApi {
 
                 Cartas carta = new Cartas();
                 carta.setName(jsonCarta.getString("name"));
-                carta.setName(jsonCarta.getString("rarity"));
-                carta.setName(jsonCarta.getString("toughness"));
-                carta.setName(jsonCarta.getString("power"));
-                carta.setName(jsonCarta.getString("manaCost"));
-                carta.setName(jsonCarta.getString("imageUrl"));
-                carta.setName(jsonCarta.getString("text"));
+                //carta.setName(jsonCarta.getString("rarity"));
+                //carta.setName(jsonCarta.getString("toughness"));
+               // carta.setName(jsonCarta.getString("power"));
+                //carta.setName(jsonCarta.getString("manaCost"));
+                //carta.setName(jsonCarta.getString("imageUrl"));
+                //carta.setName(jsonCarta.getString("text"));
 
                 cartas.add(carta);
             }
