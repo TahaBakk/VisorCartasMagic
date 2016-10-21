@@ -14,6 +14,9 @@ import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.os.AsyncTask;
+
+import org.json.JSONException;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -29,26 +32,34 @@ public class MainActivityFragment extends Fragment {
     }
 
     private class RefreshDataTask extends AsyncTask<Void, Void, ArrayList<Cartas>> {
+
+
+        @Override
+            protected ArrayList<Cartas> doInBackground(Void... voids) {
+                CartasApi api = new CartasApi();
+
+            ArrayList<Cartas> result = null;
+            try {
+                result = api.getCartes();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            Log.d("DEBUG", result.toString());
+
+            return result;
+            }
+
+
         @Override
         protected void onPostExecute(ArrayList<Cartas> cartas) {
-
+            super.onPostExecute(cartas);
             adapter.clear();
             for (Cartas carta : cartas){
                 adapter.add(carta.getName());
             }
 
         }
-
-        @Override
-            protected ArrayList<Cartas> doInBackground(Void... voids) {
-                CartasApi api = new CartasApi();
-
-                ArrayList<Cartas> result = api.getCartes();
-
-            Log.d("DEBUG", result.toString());
-
-            return result;
-            }
     }
 
 
@@ -81,10 +92,8 @@ public class MainActivityFragment extends Fragment {
 
     private void refresh() {
 
-       /* CartasApi api = new CartasApi();
-        String result = api.getCartes() ;
-
-        Log.d("DEBUG", result);*/
+       RefreshDataTask task = new RefreshDataTask();
+        task.execute();
 
     }
 
@@ -95,7 +104,7 @@ public class MainActivityFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_main, container, false);
 
         ListView lvCartas = (ListView) view.findViewById(R.id.lvCartas);
-
+/*
         String[] data = {
             "Black Lotus",
             "Time Walk",
@@ -104,9 +113,9 @@ public class MainActivityFragment extends Fragment {
             "Demonic Tutor",
             "Birds of Paradise"
         };
+*/
 
-
-        items = new ArrayList<>(Arrays.asList(data));
+        items = new ArrayList<>();
         adapter = new ArrayAdapter<>(
                 getContext(),
                 R.layout.titol_cartes,
