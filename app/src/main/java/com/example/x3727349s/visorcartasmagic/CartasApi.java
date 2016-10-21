@@ -1,7 +1,6 @@
 package com.example.x3727349s.visorcartasmagic;
 
 import android.net.Uri;
-
 import java.io.IOException;
 
 /**
