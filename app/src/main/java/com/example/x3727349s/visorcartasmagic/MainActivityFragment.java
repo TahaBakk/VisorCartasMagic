@@ -13,11 +13,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.os.AsyncTask;
-
 import org.json.JSONException;
-
 import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -89,6 +86,7 @@ public class MainActivityFragment extends Fragment {
 
         @Override
         protected void onPostExecute(ArrayList<Cartas> cartap) {
+           super.onPostExecute(cartap);
             adapter.clear();
             for (Cartas carta : cartap){
                 adapter.add(carta.getName());
@@ -114,7 +112,6 @@ public class MainActivityFragment extends Fragment {
             "Birds of Paradise"
         };
 */
-
         items = new ArrayList<>();
         adapter = new ArrayAdapter<>(
                 getContext(),
@@ -123,10 +120,6 @@ public class MainActivityFragment extends Fragment {
                 items
         );
         lvCartas.setAdapter(adapter);
-
-
-
-
 
         return view;
     }
