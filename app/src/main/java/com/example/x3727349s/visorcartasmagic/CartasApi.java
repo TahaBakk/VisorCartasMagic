@@ -10,17 +10,21 @@ import java.io.IOException;
 
 public class CartasApi {
 
+        private final String BASE_URL = "https://api.magicthegathering.io/v1/cards";
 
-    public class RottenTomatoesAPI {
-        private final String BASE_URL = "http://api.rottentomatoes.com/api/public/v1.0/";
-
-        String getPeliculesMesVistes(String pais) {
+        /*String getCartes(String cards) {
             Uri builtUri = Uri.parse(BASE_URL)
                     .buildUpon()
                     //.appendPath("lists")
                     //.appendPath("movies")
                     //.appendPath("box_office.json")
                    // .appendQueryParameter("country", pais)
+                    .build();
+            String url = builtUri.toString();*/
+
+        String getCartes() {
+            Uri builtUri = Uri.parse(BASE_URL)
+                    .buildUpon()
                     .build();
             String url = builtUri.toString();
 
@@ -32,5 +36,5 @@ public class CartasApi {
             }
             return null;
         }
-    }
+
 }
