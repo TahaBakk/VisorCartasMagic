@@ -1,7 +1,6 @@
 package com.example.x3727349s.visorcartasmagic;
 
 import android.support.annotation.Nullable;
-import android.support.constraint.solver.ArrayLinkedVariables;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.util.Log;
