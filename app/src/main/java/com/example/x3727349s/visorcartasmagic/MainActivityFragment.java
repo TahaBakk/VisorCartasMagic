@@ -81,8 +81,7 @@ public class MainActivityFragment extends Fragment {
                 e.printStackTrace();
             }
 
-
-            Log.d("DEBUG", result.toString());
+            Log.d("RESULT", result.toString());
 
             return result;
         }

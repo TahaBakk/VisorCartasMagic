@@ -70,7 +70,7 @@ public class Cartas {
 
     public String toString() {
         return "Carta{" +
-               "Name='" + name + '\'' +
+               "name='" + name + '\'' +
                "Text='" + text + '\'' +
                ", rarity=" + rarity +
                ", toughness='" + toughness + '\'' +

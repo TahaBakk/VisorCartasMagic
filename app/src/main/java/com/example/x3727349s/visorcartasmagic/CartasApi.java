@@ -17,16 +17,17 @@ import org.json.JSONObject;
 
 class CartasApi {
 
-        private final String BASE_URL = "https://api.magicthegathering.io/v1/cards";
+    private final String BASE_URL = "https://api.magicthegathering.io/v1/cards/";
 
-        ArrayList<Cartas> getCartes() throws JSONException {
-            Uri builtUri = Uri.parse(BASE_URL)
+    ArrayList<Cartas> getCartes() throws JSONException {
+        Uri builtUri = Uri.parse(BASE_URL)
                 .buildUpon()
+                .appendPath("name")
                 .build();
-            String url = builtUri.toString();
-            return doCall(url);
+        String url = builtUri.toString();
+        return doCall(url);
 
-        }
+    }
 
     @Nullable
     private ArrayList<Cartas> doCall(String url) throws JSONException {
@@ -45,8 +46,9 @@ class CartasApi {
         ArrayList<Cartas> cartas = new ArrayList<>();
 
         JSONObject data = new JSONObject(jsonResponse);
-        JSONArray jsonCartas = data.getJSONArray("Cards");
-            for (int i = 0; i < jsonCartas.length(); i++) {
+        JSONArray jsonCartas = data.getJSONArray("cartas");
+
+        for (int i = 0; i < jsonCartas.length(); i++) {
                 JSONObject jsonCarta = jsonCartas.getJSONObject(i);
 
                 Cartas carta = new Cartas();
