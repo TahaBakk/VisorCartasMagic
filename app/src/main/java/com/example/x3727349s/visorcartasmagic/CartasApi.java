@@ -2,7 +2,6 @@ package com.example.x3727349s.visorcartasmagic;
 
 import android.net.Uri;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import android.support.annotation.Nullable;
@@ -17,19 +16,18 @@ import org.json.JSONObject;
 
 class CartasApi {
 
-    private final String BASE_URL = "https://api.magicthegathering.io/v1/cards";
+    private final String BASE_URL = "https://api.magicthegathering.io/v1/cards/";
 
     ArrayList<Cartas> getCartes() throws JSONException {
         Uri builtUri = Uri.parse(BASE_URL)
                 .buildUpon()
-            //    .appendPath("name")
                 .build();
+
         String url = builtUri.toString();
         return doCall(url);
 
     }
 
-    @Nullable
     private ArrayList<Cartas> doCall(String url) throws JSONException {
         String JsonRespon=null;
         try {
@@ -49,16 +47,12 @@ class CartasApi {
         JSONArray jsonCartas = data.getJSONArray("cards");
 
         for (int i = 0; i < jsonCartas.length(); i++) {
+
                 JSONObject jsonCarta = jsonCartas.getJSONObject(i);
 
                 Cartas carta = new Cartas();
+
                 carta.setName(jsonCarta.getString("name"));
-                //carta.setName(jsonCarta.getString("rarity"));
-                //carta.setName(jsonCarta.getString("toughness"));
-               // carta.setName(jsonCarta.getString("power"));
-                //carta.setName(jsonCarta.getString("manaCost"));
-                //carta.setName(jsonCarta.getString("imageUrl"));
-                //carta.setName(jsonCarta.getString("text"));
 
                 cartas.add(carta);
             }

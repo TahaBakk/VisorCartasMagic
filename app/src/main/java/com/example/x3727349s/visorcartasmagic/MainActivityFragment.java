@@ -15,6 +15,7 @@ import android.widget.ListView;
 import android.os.AsyncTask;
 import org.json.JSONException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -68,7 +69,7 @@ public class MainActivityFragment extends Fragment {
 
 
         @Override
-        protected ArrayList<Cartas> doInBackground(Void... voids) {
+        protected ArrayList<Cartas> doInBackground(Void... params) {
 
             CartasApi api = new CartasApi();
             ArrayList<Cartas> result = null;
@@ -88,8 +89,9 @@ public class MainActivityFragment extends Fragment {
         protected void onPostExecute(ArrayList<Cartas> cartap) {
            super.onPostExecute(cartap);
             adapter.clear();
-            for (Cartas carta : cartap){
-                adapter.add(carta.getName());
+            for(int i = 0; i < cartap.size(); i++)
+            {
+                adapter.add(cartap.get(i).getName());
             }
 
         }
@@ -99,10 +101,11 @@ public class MainActivityFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         View view = inflater.inflate(R.layout.fragment_main, container, false);
 
         ListView lvCartas = (ListView) view.findViewById(R.id.lvCartas);
-/*
+
         String[] data = {
             "Black Lotus",
             "Time Walk",
@@ -111,8 +114,9 @@ public class MainActivityFragment extends Fragment {
             "Demonic Tutor",
             "Birds of Paradise"
         };
-*/
-        items = new ArrayList<>();
+
+
+        items = new ArrayList<>(Arrays.asList(data));
         adapter = new ArrayAdapter<>(
                 getContext(),
                 R.layout.titol_cartes,
