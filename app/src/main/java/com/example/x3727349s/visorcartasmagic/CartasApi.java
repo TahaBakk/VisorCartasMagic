@@ -16,7 +16,7 @@ import org.json.JSONObject;
 
 class CartasApi {
 
-    private final String BASE_URL = "https://api.magicthegathering.io/v1/cards/";
+    private final String BASE_URL = "https://api.magicthegathering.io/v1/cards";
 
     ArrayList<Cartas> getCartes() throws JSONException {
         Uri builtUri = Uri.parse(BASE_URL)
@@ -29,13 +29,13 @@ class CartasApi {
     }
 
     private ArrayList<Cartas> doCall(String url) throws JSONException {
-        String JsonRespon=null;
+        String JsonResponse=null;
         try {
-            JsonRespon = HttpUtils.get(url);
+            JsonResponse = HttpUtils.get(url);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return processJson(JsonRespon);
+        return processJson(JsonResponse);
 
     }
 

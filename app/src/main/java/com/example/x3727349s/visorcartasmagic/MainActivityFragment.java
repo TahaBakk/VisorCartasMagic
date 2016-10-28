@@ -28,7 +28,35 @@ public class MainActivityFragment extends Fragment {
     public MainActivityFragment() {
     }
 
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
 
+        View view = inflater.inflate(R.layout.fragment_main, container, false);
+
+        ListView lvCartas = (ListView) view.findViewById(R.id.lvCartas);
+
+        String[] data = {
+                "Black Lotus",
+                "Time Walk",
+                "Ancestral Recall",
+                "Lightning Bolt",
+                "Demonic Tutor",
+                "Birds of Paradise"
+        };
+
+
+        items = new ArrayList<>(Arrays.asList(data));
+        adapter = new ArrayAdapter<String>(
+                getContext(),
+                R.layout.titol_cartes,
+                R.id.tvCartes,
+                items
+        );
+        lvCartas.setAdapter(adapter);
+
+        return view;
+    }
 
 
     @Override
@@ -98,33 +126,5 @@ public class MainActivityFragment extends Fragment {
     }
 
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_main, container, false);
-
-        ListView lvCartas = (ListView) view.findViewById(R.id.lvCartas);
-
-        String[] data = {
-            "Black Lotus",
-            "Time Walk",
-            "Ancestral Recall",
-            "Lightning Bolt",
-            "Demonic Tutor",
-            "Birds of Paradise"
-        };
-
-
-        items = new ArrayList<>(Arrays.asList(data));
-        adapter = new ArrayAdapter<>(
-                getContext(),
-                R.layout.titol_cartes,
-                R.id.tvCartes,
-                items
-        );
-        lvCartas.setAdapter(adapter);
-
-        return view;
-    }
 }
