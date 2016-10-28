@@ -1,5 +1,6 @@
 package com.example.x3727349s.visorcartasmagic;
 
+import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -82,6 +83,9 @@ public class MainActivityFragment extends Fragment {
         if (id == R.id.action_refresh){
             refresh();
             return true;
+        }else if (id == R.id.action_settings) {
+            Intent i = new Intent(getContext(), SettingsActivity.class);
+            startActivity(i);
         }
         return super.onOptionsItemSelected(item);
     }
