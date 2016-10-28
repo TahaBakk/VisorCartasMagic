@@ -39,7 +39,7 @@ public class MainActivityFragment extends Fragment {
 
         ListView lvCartas = (ListView) view.findViewById(R.id.lvCartas);
 
-        String[] data = {
+        /*String[] data = {
                 "Black Lotus",
                 "Time Walk",
                 "Ancestral Recall",
@@ -47,9 +47,8 @@ public class MainActivityFragment extends Fragment {
                 "Demonic Tutor",
                 "Birds of Paradise"
         };
-
-
-        items = new ArrayList<>(Arrays.asList(data));
+        items = new ArrayList<>(Arrays.asList(data));*/
+        items = new ArrayList<>();
         adapter = new ArrayAdapter<String>(
                 getContext(),
                 R.layout.titol_cartes,
@@ -61,6 +60,11 @@ public class MainActivityFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        refresh();
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -126,25 +130,23 @@ public class MainActivityFragment extends Fragment {
             String colors = preferences.getString("colors", "Black");
 
             CartasApi api = new CartasApi();
-            ArrayList<Cartas> result = null;
+            ArrayList<Cartas> result;
+            try {
+                if (rarity.equals("Uncommon")) {
 
-            if (rarity.equals("Uncommon")){
-                try {
                     result = api.getCartes();
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }else{
-                try {
+
+                } else {
                     result = api.getCartesFiltro(rarity);
-                } catch (JSONException e) {
-                    e.printStackTrace();
                 }
+
+                Log.d("DEBUG", result != null ? result.toString() : null);
+
+                return result;
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
-
-            Log.d("DEBUG", result != null ? result.toString() : null);
-
-            return result;
+            return null;
         }
 
         @Override
