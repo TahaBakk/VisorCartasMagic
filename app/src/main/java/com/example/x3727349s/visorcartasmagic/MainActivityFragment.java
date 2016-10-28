@@ -1,6 +1,8 @@
 package com.example.x3727349s.visorcartasmagic;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -100,7 +102,7 @@ public class MainActivityFragment extends Fragment {
     private class RefreshDataTask extends AsyncTask<Void, Void, ArrayList<Cartas>> {
 
 
-        @Override
+        /*@Override
         protected ArrayList<Cartas> doInBackground(Void... params) {
 
             CartasApi api = new CartasApi();
@@ -111,11 +113,39 @@ public class MainActivityFragment extends Fragment {
                 e.printStackTrace();
             }
 
-            Log.d("RESULT", result.toString());
+            Log.d("DEBUG", result.toString());
+
+            return result;
+        }*/
+        @Override
+        protected ArrayList<Cartas> doInBackground(Void... voids) {
+
+            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+
+            String rarity = preferences.getString("rarity", "Uncommon");
+            String colors = preferences.getString("colors", "Black");
+
+            CartasApi api = new CartasApi();
+            ArrayList<Cartas> result = null;
+
+            if (rarity.equals("Uncommon")){
+                try {
+                    result = api.getCartes();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }else{
+                try {
+                    result = api.getCartesFiltro(rarity);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            Log.d("DEBUG", result != null ? result.toString() : null);
 
             return result;
         }
-
 
         @Override
         protected void onPostExecute(ArrayList<Cartas> cartap) {

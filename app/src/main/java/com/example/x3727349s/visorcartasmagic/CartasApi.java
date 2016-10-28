@@ -21,12 +21,25 @@ class CartasApi {
     ArrayList<Cartas> getCartes() throws JSONException {
         Uri builtUri = Uri.parse(BASE_URL)
                 .buildUpon()
+
                 .build();
 
         String url = builtUri.toString();
         return doCall(url);
 
     }
+
+    ArrayList<Cartas> getCartesFiltro(String rarity) throws JSONException {
+        Uri builtUri = Uri.parse(BASE_URL)
+                .buildUpon()
+                .appendQueryParameter("rarity", rarity)
+                .build();
+
+        String url = builtUri.toString();
+        return doCall(url);
+
+    }
+
 
     private ArrayList<Cartas> doCall(String url) throws JSONException {
         String JsonResponse=null;
