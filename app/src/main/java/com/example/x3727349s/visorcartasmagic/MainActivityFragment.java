@@ -140,6 +140,14 @@ public class MainActivityFragment extends Fragment {
                     result = api.getCartesFiltro(rarity);
                 }
 
+                /*if (rarity.equals("White")) {
+
+                    result = api.getCartes();
+
+                } else {
+                    result = api.getCartesFiltro(colors);
+                }*/
+
                 Log.d("DEBUG", result != null ? result.toString() : null);
 
                 return result;
