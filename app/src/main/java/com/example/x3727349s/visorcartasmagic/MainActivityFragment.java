@@ -127,7 +127,7 @@ public class MainActivityFragment extends Fragment {
             SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
 
             String rarity = preferences.getString("rarity", "Uncommon");
-            String colors = preferences.getString("colors", "Black");
+            String colors = preferences.getString("colors", "White");
 
             CartasApi api = new CartasApi();
             ArrayList<Cartas> result;
