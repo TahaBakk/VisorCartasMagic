@@ -25,7 +25,7 @@ import java.util.Arrays;
  */
 public class MainActivityFragment extends Fragment {
 
-    private ArrayList<String> items;
+    private ArrayList<Cartas> items;
     //private ArrayAdapter<String> adapter;
     private CartasAdapter adapter;
     public MainActivityFragment() {
@@ -162,7 +162,7 @@ public class MainActivityFragment extends Fragment {
             adapter.clear();
             for(int i = 0; i < cartap.size(); i++)
             {
-                adapter.add(cartap.get(i).getName());
+                adapter.add(cartap.get(i));
             }
 
         }
