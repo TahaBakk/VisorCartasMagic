@@ -12,7 +12,8 @@
         android:layout_centerVertical="true"
         android:adjustViewBounds="true"
         android:maxHeight="70dp"
-        android:scaleType="fitXY" />
+        android:scaleType="fitXY"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 
      <RelativeLayout
         android:layout_width="match_parent"
@@ -38,6 +39,7 @@
         android:layout_alignLeft="@+id/tvRarity"
         android:layout_below="@+id/tvRarity"
         android:hint="91%"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textSize="12sp" />
 
 

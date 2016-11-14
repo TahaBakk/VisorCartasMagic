@@ -21,7 +21,6 @@ class CartasApi {
     ArrayList<Cartas> getCartes() throws JSONException {
         Uri builtUri = Uri.parse(BASE_URL)
                 .buildUpon()
-
                 .build();
 
         String url = builtUri.toString();
@@ -29,10 +28,12 @@ class CartasApi {
 
     }
 
-    ArrayList<Cartas> getCartesFiltro(String rarity) throws JSONException {
+    ArrayList<Cartas> getCartesFiltro(String rarity, String color) {
         Uri builtUri = Uri.parse(BASE_URL)
+
                 .buildUpon()
                 .appendQueryParameter("rarity", rarity)
+                .appendQueryParameter("colors", color)
                 .build();
 
         String url = builtUri.toString();
@@ -41,7 +42,7 @@ class CartasApi {
     }
 
 
-    private ArrayList<Cartas> doCall(String url) throws JSONException {
+    private ArrayList<Cartas> doCall(String url)  {
         String JsonResponse=null;
         try {
             JsonResponse = HttpUtils.get(url);
@@ -52,23 +53,34 @@ class CartasApi {
 
     }
 
-    private ArrayList<Cartas> processJson(String jsonResponse) throws JSONException {
+    private ArrayList<Cartas> processJson(String jsonResponse)  {
 
         ArrayList<Cartas> cartas = new ArrayList<>();
 
-        JSONObject data = new JSONObject(jsonResponse);
-        JSONArray jsonCartas = data.getJSONArray("cards");
+        try {
+            JSONObject data = null;
+            data = new JSONObject(jsonResponse);
 
-        for (int i = 0; i < jsonCartas.length(); i++) {
+                JSONArray jsonCartas = data.getJSONArray("cards");
 
-                JSONObject jsonCarta = jsonCartas.getJSONObject(i);
+                for (int i = 0; i < jsonCartas.length(); i++) {
 
-                Cartas carta = new Cartas();
+                    JSONObject jsonCarta = jsonCartas.getJSONObject(i);
 
-                carta.setName(jsonCarta.getString("name"));
+                    Cartas carta = new Cartas();
 
-                cartas.add(carta);
+                    carta.setName(jsonCarta.getString("name"));
+                    carta.setRarity(jsonCarta.getString("rarity"));
+                    //carta.setColors(jsonCarta.getString("colors"));
+                    //carta.setImageUrl(jsonCarta.getString("imageUrl"));
+
+                    cartas.add(carta);
+
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
+
         return cartas;
 
     }

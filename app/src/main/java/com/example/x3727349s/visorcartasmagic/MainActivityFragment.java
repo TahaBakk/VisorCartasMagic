@@ -13,12 +13,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.os.AsyncTask;
 import org.json.JSONException;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -54,6 +52,7 @@ public class MainActivityFragment extends Fragment {
                 R.layout.titol_cartes,
                 items
         );
+
         lvCartas.setAdapter(adapter);
 
         return view;
@@ -121,22 +120,21 @@ public class MainActivityFragment extends Fragment {
             return result;
         }*/
         @Override
-        protected ArrayList<Cartas> doInBackground(Void... voids) {
+        protected ArrayList<Cartas> doInBackground(Void... params) {
 
             SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
-
-            String rarity = preferences.getString("rarity", "Uncommon");
-            String colors = preferences.getString("colors", "White");
+            String rarity = preferences.getString("rarity", "All");
+            String colors = preferences.getString("color", "white");
 
             CartasApi api = new CartasApi();
             ArrayList<Cartas> result;
             try {
-                if (rarity.equals("Uncommon")) {
+                if (rarity.equals("All")) {
 
                     result = api.getCartes();
 
                 } else {
-                    result = api.getCartesFiltro(rarity);
+                    result = api.getCartesFiltro(rarity, colors);
                 }
 
                 /*if (rarity.equals("White")) {
@@ -147,7 +145,7 @@ public class MainActivityFragment extends Fragment {
                     result = api.getCartesFiltro(colors);
                 }*/
 
-                Log.d("DEBUG", result != null ? result.toString() : null);
+                Log.d("CARDS", result != null ? result.toString() : null);
 
                 return result;
             } catch (JSONException e) {

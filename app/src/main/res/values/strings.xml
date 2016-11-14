@@ -22,6 +22,7 @@
     <string name="pref_title_add_friends_to_messages">Add friends to messages</string>
 
     <string-array name="pref_opcions_filtrar_titles">
+        <item>All</item>
         <item>Common</item>
         <item>Uncommon</item>
         <item>Rare</item>
@@ -29,13 +30,15 @@
         <item>Special</item>
         <item>Basic Land</item>
     </string-array>
+
     <string-array name="pref_opcions_filtrar_values">
-        <item>Comun</item>
-        <item>Colors</item>
-        <item>raro</item>
-        <item>mitico raro</item>
-        <item>Especial</item>
-        <item>Tierra basica</item>
+        <item>All</item>
+        <item>Common</item>
+        <item>Uncommon</item>
+        <item>Rare</item>
+        <item>Mythic Rare</item>
+        <item>Special</item>
+        <item>Basic Land</item>
     </string-array>
 
 

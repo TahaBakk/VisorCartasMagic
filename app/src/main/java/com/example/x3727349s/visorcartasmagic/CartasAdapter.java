@@ -51,5 +51,4 @@ public class CartasAdapter extends ArrayAdapter<Cartas> {
         }
 
 
-
 }
