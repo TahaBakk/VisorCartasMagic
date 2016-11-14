@@ -43,7 +43,7 @@ public class CartasAdapter extends ArrayAdapter<Cartas> {
 
                // Fiquem les dades dels objectes (provinents del JSON) en el layout
               tvColor.setText(cartas.getName());
-              tvRarity.setText(" -----" + cartas.getText() + "-----");
+              tvRarity.setText(" -----" + cartas.getRarity() + "-----");
               Glide.with(getContext()).load(cartas.getImageUrl()).into(ivPosterImage);
 
                // Retornem la View replena per a mostrarla
