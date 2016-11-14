@@ -4,13 +4,9 @@ package com.example.x3727349s.visorcartasmagic;
  * Created by x3727349s on 14/10/16.
  */
 
-import android.provider.ContactsContract;
-import android.text.TextUtils;
+import java.io.Serializable;
 
-import java.util.ArrayList;
-
-
-public class Cartas {
+public class Cartas implements Serializable {
 
     private String name;
     private String rarity;
