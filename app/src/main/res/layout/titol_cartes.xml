@@ -20,7 +20,7 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 
     <TextView
-        android:id="@+id/tvColor"
+        android:id="@+id/tvName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="91%"
@@ -42,7 +42,7 @@
         android:textStyle="bold"
         android:layout_marginLeft="11dp"
         android:layout_marginStart="11dp"
-        android:layout_above="@+id/tvColor"
+        android:layout_above="@+id/tvName"
         android:layout_toRightOf="@+id/ivPosterImage"
         android:layout_toEndOf="@+id/ivPosterImage"
         android:layout_marginBottom="13dp"

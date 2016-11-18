@@ -71,7 +71,7 @@ class CartasApi {
 
                     carta.setName(jsonCarta.getString("name"));
                     carta.setRarity(jsonCarta.getString("rarity"));
-                   // carta.setColors(jsonCarta.getString("colors"));
+                    carta.setColors(jsonCarta.getString("colors"));
                     carta.setImageUrl(jsonCarta.getString("imageUrl"));
 
                     cartas.add(carta);
