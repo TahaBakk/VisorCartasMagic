@@ -13,6 +13,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.os.AsyncTask;
 import org.json.JSONException;
@@ -24,7 +25,7 @@ import java.util.ArrayList;
 public class MainActivityFragment extends Fragment {
 
     private ArrayList<Cartas> items;
-    //private ArrayAdapter<String> adapter;
+
     private CartasAdapter adapter;
     public MainActivityFragment() {
     }
@@ -37,15 +38,6 @@ public class MainActivityFragment extends Fragment {
 
         ListView lvCartas = (ListView) view.findViewById(R.id.lvCartas);
 
-        /*String[] data = {
-                "Black Lotus",
-                "Time Walk",
-                "Ancestral Recall",
-                "Lightning Bolt",
-                "Demonic Tutor",
-                "Birds of Paradise"
-        };
-        items = new ArrayList<>(Arrays.asList(data));*/
         items = new ArrayList<>();
         adapter = new CartasAdapter(
                 getContext(),
@@ -54,6 +46,19 @@ public class MainActivityFragment extends Fragment {
         );
 
         lvCartas.setAdapter(adapter);
+
+        //Detall
+        lvCartas.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                Cartas cartas = (Cartas) adapterView.getItemAtPosition(i);
+
+                Intent intent = new Intent(getContext(), DetailActivity.class);
+                intent.putExtra("cartas", cartas);
+                startActivity(intent);
+            }
+        });
 
         return view;
     }
