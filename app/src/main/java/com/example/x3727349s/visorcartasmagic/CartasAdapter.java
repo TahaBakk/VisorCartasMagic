@@ -37,14 +37,15 @@ public class CartasAdapter extends ArrayAdapter<Cartas> {
            }
 
                // Unim el codi en les Views del Layout
-              TextView tvName = (TextView) convertView.findViewById(R.id.tvName);
+              TextView tvName = (TextView) convertView.findViewById(R.id.tvCartas);
               TextView tvRarity = (TextView) convertView.findViewById(R.id.tvRarity);
               ImageView ivPosterImage = (ImageView) convertView.findViewById(R.id.ivPosterImage);
 
                // Fiquem les dades dels objectes (provinents del JSON) en el layout
               //tvName.setText(cartas.getName());
               //tvRarity.setText(" -----" + cartas.getRarity() + "-----");
-              Glide.with(getContext()).load(cartas.getImageUrl()).into(ivPosterImage);
+                tvName.setText(cartas.getName());
+                Glide.with(getContext()).load(cartas.getImageUrl()).into(ivPosterImage);
 
                // Retornem la View replena per a mostrarla
               return convertView;
