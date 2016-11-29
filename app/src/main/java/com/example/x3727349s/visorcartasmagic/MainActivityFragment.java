@@ -2,6 +2,7 @@ package com.example.x3727349s.visorcartasmagic;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.databinding.DataBindingUtil;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -16,6 +17,9 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.os.AsyncTask;
+
+import com.example.x3727349s.visorcartasmagic.databinding.FragmentMainBinding;
+
 import org.json.JSONException;
 import java.util.ArrayList;
 
@@ -34,9 +38,13 @@ public class MainActivityFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_main, container, false);
+        //View view = inflater.inflate(R.layout.fragment_main, container, false);
+        //ListView lvCartas = (ListView) view.findViewById(R.id.lvCartas);
 
-        ListView lvCartas = (ListView) view.findViewById(R.id.lvCartas);
+        FragmentMainBinding binding = DataBindingUtil.inflate(
+                inflater, R.layout.fragment_main, container, false);
+
+        View view = binding.getRoot();
 
         items = new ArrayList<>();
         adapter = new CartasAdapter(
@@ -45,10 +53,10 @@ public class MainActivityFragment extends Fragment {
                 items
         );
 
-        lvCartas.setAdapter(adapter);
+        binding.lvCartas.setAdapter(adapter);
 
         //Detall
-        lvCartas.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+        binding.lvCartas.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 

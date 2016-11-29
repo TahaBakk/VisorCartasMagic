@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import com.bumptech.glide.Glide;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.databinding.DataBindingUtil;
+import com.example.x3727349s.visorcartasmagic.databinding.FragmentMainBinding;
 
 import java.util.List;
 
@@ -25,9 +27,13 @@ public class CartasAdapter extends ArrayAdapter<Cartas> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-               // Obtenim l'objecte en la possició corresponent
-              Cartas cartas = getItem(position);
-              Log.w("XXXX", cartas.toString());
+            // Obtenim l'objecte en la possició corresponent
+            Cartas cartas = getItem(position);
+            Log.w("CARTA: ", cartas.toString());
+
+            titolcartesBinding binding = null;
+
+
 
                // Mirem a veure si la View s'està reusant, si no es així "inflem" la View
               // https://github.com/codepath/android_guides/wiki/Using-an-ArrayAdapter-with-ListView#row-view-recycling

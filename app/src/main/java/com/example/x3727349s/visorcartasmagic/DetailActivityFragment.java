@@ -40,7 +40,8 @@ public class DetailActivityFragment extends Fragment {
         //View view = inflater.inflate(R.layout.fragment_detail, container, false);
         //view = inflater.inflate(R.layout.fragment_detail, container, false);
 
-        binding = DataBindingUtil.inflate( inflater, R.layout.fragment_detail, container, false);
+        binding = DataBindingUtil.inflate(
+                inflater, R.layout.fragment_detail, container, false);
 
         View view = binding.getRoot();
 
