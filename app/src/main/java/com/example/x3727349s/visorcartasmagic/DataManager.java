@@ -16,10 +16,14 @@ import static nl.qbusict.cupboard.CupboardFactory.cupboard;
 public class DataManager {
 
     private static UriHelper URI_HELPER = UriHelper.with(CartasContentProvider.AUTHORITY);
-    private static Uri MOVIE_URI = URI_HELPER.getUri(Cartas.class);
+    private static Uri CARTA_URI = URI_HELPER.getUri(Cartas.class);
 
         static void saveCartas(ArrayList<Cartas> cartas, Context context) {
-            cupboard().withContext(context).put(MOVIE_URI, Cartas.class, cartas);
+            cupboard().withContext(context).put(CARTA_URI, Cartas.class, cartas);
+        }
+
+    static void deleteCartas(Context context) {
+        cupboard().withContext(context).delete(CARTA_URI, "_id > ?", "1");
         }
 
 
