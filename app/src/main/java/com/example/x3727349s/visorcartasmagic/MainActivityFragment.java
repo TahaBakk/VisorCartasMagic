@@ -142,12 +142,20 @@ public class MainActivityFragment extends Fragment {
             CartasApi api = new CartasApi();
             ArrayList<Cartas> result;
             try {
-                if (rarity.equals("All")) {
+                /*if (rarity.equals("All")) {
 
                     result = api.getCartes();
 
                 } else {
                     result = api.getCartesFiltro(rarity, colors);
+                }*/
+
+                if (rarity.equals("All")) {
+
+                    result = CartasApi.getCartes();
+
+                } else {
+                    result = CartasApi.getCartesFiltro(rarity, colors);
                 }
 
                 /*if (rarity.equals("White")) {

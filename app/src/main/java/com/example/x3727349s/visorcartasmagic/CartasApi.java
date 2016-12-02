@@ -17,11 +17,11 @@ import org.json.JSONObject;
 
 class CartasApi {
 
-    private final String BASE_URL = "https://api.magicthegathering.io/v1/cards";
-    private final Integer LIMIT = 50;
+    private final static String BASE_URL = "https://api.magicthegathering.io/v1/cards";
+    //private final static Integer LIMIT = 50;
 
 
-    ArrayList<Cartas> getCartes() throws JSONException {
+    static ArrayList<Cartas> getCartes() throws JSONException {
         Uri builtUri = Uri.parse(BASE_URL)
                 .buildUpon()
                 .build();
@@ -31,7 +31,7 @@ class CartasApi {
 
     }
 
-    ArrayList<Cartas> getCartesFiltro(String rarity, String color) {
+    static ArrayList<Cartas> getCartesFiltro(String rarity, String color) {
 
 
        /* Uri builtUri = Uri.parse(BASE_URL)
@@ -50,7 +50,7 @@ class CartasApi {
     }
 
 
-    private ArrayList<Cartas> doCall(String url)  {
+    private static ArrayList<Cartas> doCall(String url)  {
         String JsonResponse=null;
         try {
             JsonResponse = HttpUtils.get(url);
@@ -62,7 +62,7 @@ class CartasApi {
     }
 
 
-    private String getUrl(String rarity, String color, String s) {
+    private static String getUrl(String rarity, String color, String s) {
 
         Uri builtUri = Uri.parse(BASE_URL)
                 .buildUpon()
@@ -74,7 +74,7 @@ class CartasApi {
     }
 
 
-    private ArrayList<Cartas> processJson(String jsonResponse)  {
+    private static ArrayList<Cartas> processJson(String jsonResponse)  {
 
         ArrayList<Cartas> cartas = new ArrayList<>();
 
