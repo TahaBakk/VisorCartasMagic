@@ -3,6 +3,7 @@ package com.example.x3727349s.visorcartasmagic;
 import android.net.Uri;
 import java.io.IOException;
 import java.util.ArrayList;
+import android.util.Log;
 
 import android.support.annotation.Nullable;
 
@@ -17,6 +18,8 @@ import org.json.JSONObject;
 class CartasApi {
 
     private final String BASE_URL = "https://api.magicthegathering.io/v1/cards";
+    private final Integer LIMIT = 50;
+
 
     ArrayList<Cartas> getCartes() throws JSONException {
         Uri builtUri = Uri.parse(BASE_URL)
@@ -29,14 +32,19 @@ class CartasApi {
     }
 
     ArrayList<Cartas> getCartesFiltro(String rarity, String color) {
-        Uri builtUri = Uri.parse(BASE_URL)
+
+
+       /* Uri builtUri = Uri.parse(BASE_URL)
 
                 .buildUpon()
                 .appendQueryParameter("rarity", rarity)
                 .appendQueryParameter("colors", color)
-                .build();
+                .build();*/
 
-        String url = builtUri.toString();
+        //String url = builtUri.toString();
+        String url = getUrl(rarity, color, "box_office.json");
+
+        Log.d("URL", url);
         return doCall(url);
 
     }
@@ -52,6 +60,19 @@ class CartasApi {
         return processJson(JsonResponse);
 
     }
+
+
+    private String getUrl(String rarity, String color, String s) {
+
+        Uri builtUri = Uri.parse(BASE_URL)
+                .buildUpon()
+                .appendQueryParameter("rarity", rarity)
+                .appendQueryParameter("colors", color)
+                .build();
+
+                return builtUri.toString();
+    }
+
 
     private ArrayList<Cartas> processJson(String jsonResponse)  {
 
