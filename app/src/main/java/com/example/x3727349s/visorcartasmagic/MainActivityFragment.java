@@ -3,6 +3,7 @@ package com.example.x3727349s.visorcartasmagic;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.databinding.DataBindingUtil;
+import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -23,6 +24,10 @@ import com.example.x3727349s.visorcartasmagic.databinding.FragmentMainBinding;
 import org.json.JSONException;
 import java.util.ArrayList;
 
+import nl.littlerobots.cupboard.tools.provider.UriHelper;
+
+import static nl.qbusict.cupboard.CupboardFactory.cupboard;
+
 /**
  * A placeholder fragment containing a simple view.
  */
@@ -31,6 +36,7 @@ public class MainActivityFragment extends Fragment {
     private ArrayList<Cartas> items;
 
     private CartasAdapter adapter;
+
     public MainActivityFragment() {
     }
 
@@ -56,7 +62,7 @@ public class MainActivityFragment extends Fragment {
         binding.lvCartas.setAdapter(adapter);
 
         //Detall
-        binding.lvCartas.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+        binding.lvCartas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
@@ -97,10 +103,10 @@ public class MainActivityFragment extends Fragment {
 
         int id = item.getItemId();
 
-        if (id == R.id.action_refresh){
+        if (id == R.id.action_refresh) {
             refresh();
             return true;
-        }else if (id == R.id.action_settings) {
+        } else if (id == R.id.action_settings) {
             Intent i = new Intent(getContext(), SettingsActivity.class);
             startActivity(i);
         }
@@ -114,7 +120,8 @@ public class MainActivityFragment extends Fragment {
 
     }
 
-    private class RefreshDataTask extends AsyncTask<Void, Void, ArrayList<Cartas>> {
+    /*private class RefreshDataTask extends AsyncTask<Void, Void, ArrayList<Cartas>> {*/
+    private class RefreshDataTask extends AsyncTask<Void, Void, Void> {
 
 
         /*@Override
@@ -133,23 +140,16 @@ public class MainActivityFragment extends Fragment {
             return result;
         }*/
         @Override
-        protected ArrayList<Cartas> doInBackground(Void... params) {
+        protected Void doInBackground(Void... voids) {
 
             SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
             String rarity = preferences.getString("rarity", "All");
             String colors = preferences.getString("colors", "white");
 
             CartasApi api = new CartasApi();
+
             ArrayList<Cartas> result;
             try {
-                /*if (rarity.equals("All")) {
-
-                    result = api.getCartes();
-
-                } else {
-                    result = api.getCartesFiltro(rarity, colors);
-                }*/
-
                 if (rarity.equals("All")) {
 
                     result = CartasApi.getCartes();
@@ -158,35 +158,29 @@ public class MainActivityFragment extends Fragment {
                     result = CartasApi.getCartesFiltro(rarity, colors);
                 }
 
-                /*if (rarity.equals("White")) {
-
-                    result = api.getCartes();
-
-                } else {
-                    result = api.getCartesFiltro(colors);
-                }*/
-
                 Log.d("CARDS", result != null ? result.toString() : null);
 
-                return result;
+                UriHelper helper = UriHelper.with(CartasContentProvider.AUTHORITY);
+                Uri movieUri = helper.getUri(Cartas.class);
+                cupboard().withContext(getContext()).put(movieUri, Cartas.class, result);
+
+
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            return null;
-        }
 
-        @Override
+        /*@Override
         protected void onPostExecute(ArrayList<Cartas> cartap) {
            super.onPostExecute(cartap);
             adapter.clear();
             for(int i = 0; i < cartap.size(); i++)
             {
                 adapter.add(cartap.get(i));
-            }
-
+            }*/
+            return null;
         }
     }
-
-
-
 }
+
+
+
