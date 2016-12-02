@@ -2,17 +2,17 @@ package com.example.x3727349s.visorcartasmagic;
 
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
-import android.databinding.tool.Binding;
-import android.databinding.tool.DataBindingBuilder;
+//import android.databinding.tool.Binding;
+//import android.databinding.tool.DataBindingBuilder;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
-import android.text.Html;
+//import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
+//import android.widget.ImageView;
+//import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.x3727349s.visorcartasmagic.databinding.FragmentDetailBinding;
@@ -20,6 +20,7 @@ import com.example.x3727349s.visorcartasmagic.databinding.FragmentDetailBinding;
 /**
  * A placeholder fragment containing a simple view.
  */
+
 public class DetailActivityFragment extends Fragment {
 
     //TOT EL QUE ESTA COMENTAT ES PER FER EL CAMVI PER DATABINDING
