@@ -3,7 +3,6 @@ package com.example.x3727349s.visorcartasmagic;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.databinding.DataBindingUtil;
-import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -24,9 +23,7 @@ import com.example.x3727349s.visorcartasmagic.databinding.FragmentMainBinding;
 import org.json.JSONException;
 import java.util.ArrayList;
 
-import nl.littlerobots.cupboard.tools.provider.UriHelper;
 
-import static nl.qbusict.cupboard.CupboardFactory.cupboard;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -160,9 +157,7 @@ public class MainActivityFragment extends Fragment {
 
                 Log.d("CARDS", result != null ? result.toString() : null);
 
-                UriHelper helper = UriHelper.with(CartasContentProvider.AUTHORITY);
-                Uri movieUri = helper.getUri(Cartas.class);
-                cupboard().withContext(getContext()).put(movieUri, Cartas.class, result);
+                DataManager.saveCartas(result, getContext());
 
 
             } catch (JSONException e) {
