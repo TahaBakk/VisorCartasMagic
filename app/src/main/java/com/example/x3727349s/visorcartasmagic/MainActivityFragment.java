@@ -32,7 +32,8 @@ public class MainActivityFragment extends Fragment {
 
     private ArrayList<Cartas> items;
 
-    private CartasAdapter adapter;
+    //private CartasAdapter adapter;// lo cambiamos por la de cartasCursorAdapter que es mas facil y menos pasos
+    private CartasCursorAdapter adapter;
 
     public MainActivityFragment() {
     }
@@ -50,11 +51,14 @@ public class MainActivityFragment extends Fragment {
         View view = binding.getRoot();
 
         items = new ArrayList<>();
-        adapter = new CartasAdapter(
+        //cambiando la classe de cartasAdapter por la cartasCursorAdapter
+        /*adapter = new CartasAdapter(
                 getContext(),
                 R.layout.titol_cartes,
                 items
-        );
+        );*/
+
+        adapter = new CartasCursorAdapter(getContext(), Cartas.class);
 
         binding.lvCartas.setAdapter(adapter);
 
