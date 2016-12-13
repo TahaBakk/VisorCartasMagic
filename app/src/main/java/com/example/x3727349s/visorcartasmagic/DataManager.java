@@ -2,6 +2,8 @@ package com.example.x3727349s.visorcartasmagic;
 
 import android.content.Context;
 import android.net.Uri;
+import android.support.v4.content.CursorLoader;
+import android.widget.CursorAdapter;
 
 import java.util.ArrayList;
 
@@ -23,8 +25,12 @@ public class DataManager {
         }
 
     static void deleteCartas(Context context) {
-        cupboard().withContext(context).delete(CARTA_URI, "_id > ?", "1");
+        cupboard().withContext(context).delete(CARTA_URI, "_id > ?", "0");
         }
+
+    static CursorLoader getCursorLoader(Context context){
+        return  new CursorLoader(context, CARTA_URI, null, null, null, null);
+    }
 
 
 }

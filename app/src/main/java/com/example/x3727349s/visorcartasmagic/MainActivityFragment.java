@@ -1,7 +1,10 @@
 package com.example.x3727349s.visorcartasmagic;
 
+import android.app.LoaderManager;
 import android.content.Intent;
+import android.content.Loader;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.databinding.DataBindingUtil;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
@@ -18,6 +21,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.os.AsyncTask;
 
+
 import com.example.x3727349s.visorcartasmagic.databinding.FragmentMainBinding;
 
 import org.json.JSONException;
@@ -28,9 +32,9 @@ import java.util.ArrayList;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class MainActivityFragment extends Fragment {
+public class MainActivityFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
 
-    private ArrayList<Cartas> items;
+    //private ArrayList<Cartas> items;
 
     //private CartasAdapter adapter;// lo cambiamos por la de cartasCursorAdapter que es mas facil y menos pasos
     private CartasCursorAdapter adapter;
@@ -50,7 +54,7 @@ public class MainActivityFragment extends Fragment {
 
         View view = binding.getRoot();
 
-        items = new ArrayList<>();
+        //items = new ArrayList<>();
         //cambiando la classe de cartasAdapter por la cartasCursorAdapter
         /*adapter = new CartasAdapter(
                 getContext(),
@@ -74,6 +78,8 @@ public class MainActivityFragment extends Fragment {
                 startActivity(intent);
             }
         });
+
+        getLoaderManager().initLoader(0, null, this);
 
         return view;
     }
@@ -120,6 +126,22 @@ public class MainActivityFragment extends Fragment {
         task.execute();
 
     }
+
+    @Override
+    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+        return DataManager.getCursorLoader(getContext());
+    }
+
+    @Override
+    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+
+    }
+
+    @Override
+    public void onLoaderReset(Loader<Cursor> loader) {
+
+    }
+
 
     /*private class RefreshDataTask extends AsyncTask<Void, Void, ArrayList<Cartas>> {*/
     private class RefreshDataTask extends AsyncTask<Void, Void, Void> {
