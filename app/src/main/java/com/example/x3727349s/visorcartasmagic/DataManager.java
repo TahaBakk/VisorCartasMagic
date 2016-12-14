@@ -3,7 +3,7 @@ package com.example.x3727349s.visorcartasmagic;
 import android.content.Context;
 import android.net.Uri;
 import android.support.v4.content.CursorLoader;
-import android.widget.CursorAdapter;
+import android.widget.CursorAdapter;//es para el adapter que usaba antes
 
 import java.util.ArrayList;
 

@@ -21,17 +21,18 @@ public class CartasCursorAdapter extends CupboardCursorAdapter<Cartas> {
 
       @Override
       public View newView(Context context, Cartas model, ViewGroup parent) {
-          LayoutInflater inflater = LayoutInflater.from(context);
 
+          LayoutInflater inflater = LayoutInflater.from(context);
 
           TitolCartesBinding binding = DataBindingUtil.inflate(
                   inflater, R.layout.titol_cartes, parent, false);
 
           return binding.getRoot();
       }
-  //esto es lo que me muestra en cada item de la lista utilitzem aquest i deixem de fer servir  el cartasAdapter
+  //això és el que em muestra en cada item de la llista utilitzem aquest i deixem de fer servir  el cartasAdapter
       @Override
       public void bindView(View view, Context context, Cartas model) {
+
           TitolCartesBinding binding = DataBindingUtil.getBinding(view);
           binding.tvCartas.setText(model.getName());
           Glide.with(context).load(model.getImageUrl()).into(binding.ivPosterImage);
