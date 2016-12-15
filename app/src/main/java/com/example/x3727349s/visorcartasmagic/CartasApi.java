@@ -4,9 +4,7 @@ import android.net.Uri;
 import java.io.IOException;
 import java.util.ArrayList;
 import android.util.Log;
-
 import android.support.annotation.Nullable;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -18,10 +16,10 @@ import org.json.JSONObject;
 class CartasApi {
 
     private final static String BASE_URL = "https://api.magicthegathering.io/v1/cards";
-    //private final static Integer LIMIT = 50;
+    private static final int PAGES = 10;
 
+    static ArrayList<Cartas> getCartes() throws JSONException, IOException {
 
-    static ArrayList<Cartas> getCartes() throws JSONException {
         Uri builtUri = Uri.parse(BASE_URL)
                 .buildUpon()
                 .build();
@@ -31,17 +29,8 @@ class CartasApi {
 
     }
 
-    static ArrayList<Cartas> getCartesFiltro(String rarity, String color) {
+    static ArrayList<Cartas> getCartesFiltro(String rarity, String color) throws IOException {
 
-
-       /* Uri builtUri = Uri.parse(BASE_URL)
-
-                .buildUpon()
-                .appendQueryParameter("rarity", rarity)
-                .appendQueryParameter("colors", color)
-                .build();*/
-
-        //String url = builtUri.toString();
         String url = getUrl(rarity, color, "box_office.json");
 
         Log.d("URL", url);
@@ -50,15 +39,20 @@ class CartasApi {
     }
 
 
-    private static ArrayList<Cartas> doCall(String url)  {
-        String JsonResponse=null;
-        try {
-            JsonResponse = HttpUtils.get(url);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return processJson(JsonResponse);
+    private static ArrayList<Cartas> doCall(String url) throws IOException {
 
+        String JsonResponse=null;
+        ArrayList<Cartas> cartas = new ArrayList<>();
+
+        for (int i = 0; i < PAGES; i++) {
+            JsonResponse = HttpUtils.get(url);
+            ArrayList<Cartas> list = processJson(JsonResponse);
+            cartas.addAll(list);
+        }
+        //JsonResponse = HttpUtils.get(url);
+
+        //return processJson(JsonResponse);
+        return cartas;
     }
 
 
@@ -71,6 +65,18 @@ class CartasApi {
                 .build();
 
                 return builtUri.toString();
+    }
+
+
+    private static String getUrlPage(int page) {
+
+        Uri builtUri = Uri.parse(BASE_URL)
+
+               .buildUpon()
+               .appendQueryParameter("page", String.valueOf(page))
+               .build();
+
+        return builtUri.toString();
     }
 
 

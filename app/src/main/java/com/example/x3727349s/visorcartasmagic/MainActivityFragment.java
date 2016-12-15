@@ -28,6 +28,8 @@ import android.support.v4.content.Loader;
 import com.example.x3727349s.visorcartasmagic.databinding.FragmentMainBinding;
 
 import org.json.JSONException;
+
+import java.io.IOException;
 import java.util.ArrayList;
 
 
@@ -198,6 +200,8 @@ public class MainActivityFragment extends Fragment implements LoaderManager.Load
 
 
             } catch (JSONException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
                 e.printStackTrace();
             }
 
