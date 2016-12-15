@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.databinding.DataBindingUtil;
+import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.os.Bundle;
@@ -16,8 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ListView;
-import android.os.AsyncTask;
+import android.app.ProgressDialog;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 
@@ -41,6 +41,7 @@ public class MainActivityFragment extends Fragment implements LoaderManager.Load
 
     //private CartasAdapter adapter;// lo cambiamos por la de cartasCursorAdapter que es mas facil y menos pasos
     private CartasCursorAdapter adapter;
+    private ProgressDialog dialog;
 
     public MainActivityFragment() {
     }
@@ -67,6 +68,9 @@ public class MainActivityFragment extends Fragment implements LoaderManager.Load
 
         adapter = new CartasCursorAdapter(getContext(), Cartas.class);
 
+        dialog = new ProgressDialog(getContext());
+        dialog.setMessage("Loading...");//mensaje a mostrar mientras carga las cartas
+
         binding.lvCartas.setAdapter(adapter);
 
         //Detall
@@ -91,7 +95,6 @@ public class MainActivityFragment extends Fragment implements LoaderManager.Load
     @Override
     public void onStart() {
         super.onStart();
-        refresh();
     }
 
     @Override
@@ -149,8 +152,11 @@ public class MainActivityFragment extends Fragment implements LoaderManager.Load
 
     /*private class RefreshDataTask extends AsyncTask<Void, Void, ArrayList<Cartas>> {*/
     private class RefreshDataTask extends AsyncTask<Void, Void, Void> {
-
-
+        //mientras se esta ejecutando que lo muestre el msj
+        protected void onPreExecute() {
+            super.onPreExecute();
+            dialog.show();
+        }
         /*@Override
         protected ArrayList<Cartas> doInBackground(Void... params) {
 
@@ -205,6 +211,12 @@ public class MainActivityFragment extends Fragment implements LoaderManager.Load
             }*/
             return null;
         }
+        //despues de ejecutarlo lo quita
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            dialog.dismiss();
+            }
     }
 }
 
