@@ -87,6 +87,12 @@ public class MainActivityFragment extends Fragment implements LoaderManager.Load
         return view;
     }
 
+
+    /*@Events.Subscribe("Cartas-selected")
+    private void cardselected(Cartas cartas){
+            updateui(cartas);
+    }*/
+
     @Events.Subscribe("start-downloading-data")
     void preRefresh() {
             dialog.show();

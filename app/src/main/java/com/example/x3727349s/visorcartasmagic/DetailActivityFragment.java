@@ -25,13 +25,6 @@ import com.example.x3727349s.visorcartasmagic.databinding.FragmentDetailBinding;
 
 public class DetailActivityFragment extends Fragment {
 
-    //TOT EL QUE ESTA COMENTAT ES PER FER EL CAMVI PER DATABINDING
-    /*private View view;
-    private ImageView ivPosterImage;
-    private TextView tvName;
-    private TextView tvRarity;
-    private TextView tvColor;
-    private TextView tvDescripcion;*/
     private FragmentDetailBinding binding;
 
     public DetailActivityFragment() {
@@ -72,25 +65,13 @@ public class DetailActivityFragment extends Fragment {
     }
 
     @Events.Subscribe("cartas-selected")
-    private void onMovieSelected(Cartas cartas) {
+    private void onCartasSelected(Cartas cartas) {
             updateui(cartas);
     }
 
 
     private void updateui(Cartas cartas) {
         Log.d("CARTA", cartas.toString());
-
-        /*ivPosterImage = (ImageView) view.findViewById(R.id.ivPosterImage);
-        tvName = (TextView) view.findViewById(R.id.tvName);
-        tvRarity = (TextView) view.findViewById(R.id.tvRarity);
-        tvColor = (TextView) view.findViewById(R.id.tvColor);
-        tvDescripcion = (TextView) view.findViewById(R.id.tvDescripcion);*/
-
-        /*tvName.setText(cartas.getName());
-        tvRarity.setText(cartas.getRarity());
-        tvColor.setText(cartas.getColors());
-        tvDescripcion.setText(cartas.getText());
-        Glide.with(getContext()).load(cartas.getImageUrl()).into(ivPosterImage);*/
 
         binding.tvName.setText(cartas.getName());
         binding.tvRarity.setText(cartas.getRarity());
