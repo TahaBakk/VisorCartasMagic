@@ -1,15 +1,11 @@
 package com.example.x3727349s.visorcartasmagic;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.databinding.DataBindingUtil;
-import android.os.AsyncTask;
-import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -20,17 +16,11 @@ import android.widget.AdapterView;
 import android.app.ProgressDialog;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
-
-
-
-
+import com.alexvasilkov.events.Events;
+import org.json.JSONException;
+import java.io.IOException;
 
 import com.example.x3727349s.visorcartasmagic.databinding.FragmentMainBinding;
-
-import org.json.JSONException;
-
-import java.io.IOException;
-import java.util.ArrayList;
 
 
 
@@ -85,6 +75,8 @@ public class MainActivityFragment extends Fragment implements LoaderManager.Load
                     Intent intent = new Intent(getContext(), DetailActivity.class);
                     intent.putExtra("cartas", cartas);
                     startActivity(intent);
+                }else {
+                    Events.create("cartas-selected").param(cartas).post();
                 }
             }
         });
@@ -136,7 +128,7 @@ public class MainActivityFragment extends Fragment implements LoaderManager.Load
 
     private void refresh() {
 
-        RefreshDataTask task = new RefreshDataTask();
+        RefreshDataTask task = new RefreshDataTask(getActivity().getApplicationContext());
         task.execute();
 
     }
@@ -158,7 +150,7 @@ public class MainActivityFragment extends Fragment implements LoaderManager.Load
 
 
     /*private class RefreshDataTask extends AsyncTask<Void, Void, ArrayList<Cartas>> {*/
-    private class RefreshDataTask extends AsyncTask<Void, Void, Void> {
+   /* private class RefreshDataTask extends AsyncTask<Void, Void, Void> {
         //mientras se esta ejecutando que lo muestre el msj
         protected void onPreExecute() {
             super.onPreExecute();
@@ -179,7 +171,7 @@ public class MainActivityFragment extends Fragment implements LoaderManager.Load
 
             return result;
         }*/
-        @Override
+        /*@Override
         protected Void doInBackground(Void... voids) {
 
             SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
@@ -218,15 +210,15 @@ public class MainActivityFragment extends Fragment implements LoaderManager.Load
             {
                 adapter.add(cartap.get(i));
             }*/
-            return null;
-        }
+           /* return null;
+        }*/
         //despues de ejecutarlo lo quita
-        @Override
+        /*@Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
             dialog.dismiss();
             }
-    }
+    }*/
 }
 
 
