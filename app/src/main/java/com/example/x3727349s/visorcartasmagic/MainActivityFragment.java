@@ -81,10 +81,11 @@ public class MainActivityFragment extends Fragment implements LoaderManager.Load
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
                 Cartas cartas = (Cartas) adapterView.getItemAtPosition(i);
-
-                Intent intent = new Intent(getContext(), DetailActivity.class);
-                intent.putExtra("cartas", cartas);
-                startActivity(intent);
+                if (!esTablet()) {
+                    Intent intent = new Intent(getContext(), DetailActivity.class);
+                    intent.putExtra("cartas", cartas);
+                    startActivity(intent);
+                }
             }
         });
 
@@ -105,6 +106,10 @@ public class MainActivityFragment extends Fragment implements LoaderManager.Load
 
         setHasOptionsMenu(true);
     }
+
+    boolean esTablet() {
+        return getResources().getBoolean(R.bool.tablet);
+        }
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
